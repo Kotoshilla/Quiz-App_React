@@ -1,21 +1,35 @@
 import { Component, Fragment } from 'react'
+import { NavLink } from 'react-router-dom'
 
 import Backdrop from '../../UI/Backdrop/Backdrop'
 
 import './Drawer.css'
 
 const links = [
-    1, 2, 3,
+    {to: '/', label: 'Список',},
+    {to: '/auth', label: 'Авторизация',},
+    {to: '/quiz-creator', label: 'Создать тест',},
+
 ]
 
 
 class Drawer extends Component {
 
+    clickClose = () => {
+        this.props.onClose()
+    }
+
     renderLinks() {
         return links.map((link, i) => {
             return (
                 <li key={i}>
-                    <a>Link {link}</a>
+                    <NavLink to={link.to}
+                             exact={toString(link.exact)}
+                             onClick={this.clickClose}
+
+                    >
+                        {link.label}
+                    </NavLink>
                 </li>
             )
         })
